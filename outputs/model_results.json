@@ -1,0 +1,14 @@
+{
+  "gradient_boosting": {
+    "model": "Gradient Boosting Regressor",
+    "r2_score": 0.9964,
+    "mae": 0.2892,
+    "rmse": 0.4719
+  },
+  "extra_trees": {
+    "model": "Extra Trees Regressor",
+    "r2_score": 0.8916,
+    "mae": 1.6497,
+    "rmse": 2.5966
+  }
+}

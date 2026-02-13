@@ -1,0 +1,13 @@
+{
+  "raw_records": 911057,
+  "cleaned_records": 910522,
+  "records_removed": 535,
+  "pct_removed": 0.1,
+  "date_range": "2016-06-04 to 2017-02-07",
+  "fare_median": 8.31,
+  "fare_mean": 10.94,
+  "distance_median_miles": 3.61,
+  "duration_median_seconds": 662.0,
+  "total_columns": 37,
+  "surge_pct": 10.2
+}

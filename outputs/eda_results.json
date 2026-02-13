@@ -1,0 +1,7 @@
+{
+  "fare_skewness": 4.36,
+  "peak_demand_hour": 4,
+  "busiest_day": "Sun",
+  "surge_trip_pct": 10.2,
+  "distance_fare_correlation": 0.849
+}
