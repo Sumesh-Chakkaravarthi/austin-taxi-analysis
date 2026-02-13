@@ -825,9 +825,24 @@ def run_ml_models(df):
     with open(os.path.join(OUTPUT_DIR, 'model_results.json'), 'w') as f:
         json.dump(model_results, f, indent=2)
 
+    # ── Model Accuracy Summary ─────────────────────────────────────────────
     best = 'Extra Trees' if et_metrics['r2_score'] > gb_metrics['r2_score'] else 'Gradient Boosting'
+    gb_accuracy_pct = gb_metrics['r2_score'] * 100
+    et_accuracy_pct = et_metrics['r2_score'] * 100
+
     print(f"\n  ✅ ML modeling complete — 4 visualizations saved")
-    print(f"  🏆 Best model: {best}")
+    print(f"\n  {'─'*58}")
+    print(f"  {'MODEL ACCURACY REPORT':^58}")
+    print(f"  {'─'*58}")
+    print(f"  {'Model':<28} {'R²':>8} {'MAE':>10} {'RMSE':>10}")
+    print(f"  {'─'*58}")
+    print(f"  {'Gradient Boosting':<28} {gb_metrics['r2_score']:>8.4f} {gb_metrics['mae']:>9.2f}$ {gb_metrics['rmse']:>9.2f}$")
+    print(f"  {'Extra Trees':<28} {et_metrics['r2_score']:>8.4f} {et_metrics['mae']:>9.2f}$ {et_metrics['rmse']:>9.2f}$")
+    print(f"  {'─'*58}")
+    print(f"  Gradient Boosting Accuracy : {gb_accuracy_pct:.2f}%")
+    print(f"  Extra Trees Accuracy       : {et_accuracy_pct:.2f}%")
+    print(f"  {'─'*58}")
+    print(f"  🏆 Best model: {best} ({max(gb_accuracy_pct, et_accuracy_pct):.2f}% accuracy)")
 
     return model_results
 

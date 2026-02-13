@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Austin TX — Taxi Ride Analysis Dashboard</title>
-    <meta name="description" content="Interactive EDA dashboard for Austin TX RideAustin dataset analysis — ALY6110 DBMS Project">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description"
+        content="Interactive EDA dashboard for Austin TX RideAustin dataset analysis — ALY6110 DBMS Project">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg-primary: #0d1117;
@@ -25,11 +28,15 @@
             --gradient-1: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
             --gradient-2: linear-gradient(135deg, #7ee787 0%, #58a6ff 100%);
             --gradient-3: linear-gradient(135deg, #f78166 0%, #d29922 100%);
-            --shadow: 0 8px 32px rgba(0,0,0,0.3);
-            --shadow-lg: 0 16px 48px rgba(0,0,0,0.4);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -43,11 +50,14 @@
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background:
-                radial-gradient(ellipse at 20% 50%, rgba(88,166,255,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(188,140,255,0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 60% 80%, rgba(126,231,135,0.05) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 50%, rgba(88, 166, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(188, 140, 255, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, rgba(126, 231, 135, 0.05) 0%, transparent 50%);
             z-index: 0;
             pointer-events: none;
         }
@@ -72,8 +82,8 @@
             align-items: center;
             gap: 8px;
             padding: 6px 16px;
-            background: rgba(88,166,255,0.1);
-            border: 1px solid rgba(88,166,255,0.2);
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.2);
             border-radius: 40px;
             font-size: 13px;
             font-weight: 500;
@@ -123,22 +133,41 @@
         .stat-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 3px;
             border-radius: 16px 16px 0 0;
         }
 
-        .stat-card:nth-child(1)::before { background: var(--gradient-1); }
-        .stat-card:nth-child(2)::before { background: var(--gradient-2); }
-        .stat-card:nth-child(3)::before { background: var(--gradient-3); }
-        .stat-card:nth-child(4)::before { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); }
-        .stat-card:nth-child(5)::before { background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange)); }
-        .stat-card:nth-child(6)::before { background: linear-gradient(135deg, var(--accent-green), var(--accent-blue)); }
+        .stat-card:nth-child(1)::before {
+            background: var(--gradient-1);
+        }
+
+        .stat-card:nth-child(2)::before {
+            background: var(--gradient-2);
+        }
+
+        .stat-card:nth-child(3)::before {
+            background: var(--gradient-3);
+        }
+
+        .stat-card:nth-child(4)::before {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+        }
+
+        .stat-card:nth-child(5)::before {
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+        }
+
+        .stat-card:nth-child(6)::before {
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+        }
 
         .stat-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow);
-            border-color: rgba(88,166,255,0.3);
+            border-color: rgba(88, 166, 255, 0.3);
         }
 
         .stat-card .stat-value {
@@ -148,12 +177,29 @@
             margin-bottom: 6px;
         }
 
-        .stat-card:nth-child(1) .stat-value { color: var(--accent-blue); }
-        .stat-card:nth-child(2) .stat-value { color: var(--accent-green); }
-        .stat-card:nth-child(3) .stat-value { color: var(--accent-orange); }
-        .stat-card:nth-child(4) .stat-value { color: var(--accent-purple); }
-        .stat-card:nth-child(5) .stat-value { color: var(--accent-yellow); }
-        .stat-card:nth-child(6) .stat-value { color: var(--accent-green); }
+        .stat-card:nth-child(1) .stat-value {
+            color: var(--accent-blue);
+        }
+
+        .stat-card:nth-child(2) .stat-value {
+            color: var(--accent-green);
+        }
+
+        .stat-card:nth-child(3) .stat-value {
+            color: var(--accent-orange);
+        }
+
+        .stat-card:nth-child(4) .stat-value {
+            color: var(--accent-purple);
+        }
+
+        .stat-card:nth-child(5) .stat-value {
+            color: var(--accent-yellow);
+        }
+
+        .stat-card:nth-child(6) .stat-value {
+            color: var(--accent-green);
+        }
 
         .stat-card .stat-label {
             font-size: 13px;
@@ -219,7 +265,7 @@
         }
 
         .chart-card:hover {
-            border-color: rgba(88,166,255,0.3);
+            border-color: rgba(88, 166, 255, 0.3);
             box-shadow: var(--shadow);
         }
 
@@ -244,10 +290,20 @@
             letter-spacing: 0.5px;
         }
 
-        .chart-tag.eda { background: rgba(88,166,255,0.15); color: var(--accent-blue); }
-        .chart-tag.ml { background: rgba(126,231,135,0.15); color: var(--accent-green); }
-        .chart-tag.weather { background: rgba(210,153,34,0.15); color: var(--accent-yellow); }
-        .chart-tag.correlation { background: rgba(188,140,255,0.15); color: var(--accent-purple); }
+        .chart-tag.eda {
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .chart-tag.ml {
+            background: rgba(126, 231, 135, 0.15);
+            color: var(--accent-green);
+        }
+
+        .chart-tag.correlation {
+            background: rgba(188, 140, 255, 0.15);
+            color: var(--accent-purple);
+        }
 
         .chart-card img {
             width: 100%;
@@ -283,10 +339,12 @@
         .model-table td {
             padding: 16px;
             font-size: 15px;
-            border-bottom: 1px solid rgba(48,54,61,0.5);
+            border-bottom: 1px solid rgba(48, 54, 61, 0.5);
         }
 
-        .model-table tr:last-child td { border-bottom: none; }
+        .model-table tr:last-child td {
+            border-bottom: none;
+        }
 
         .model-table .model-name {
             font-weight: 700;
@@ -306,7 +364,7 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            background: rgba(126,231,135,0.15);
+            background: rgba(126, 231, 135, 0.15);
             color: var(--accent-green);
             font-size: 11px;
             font-weight: 700;
@@ -399,32 +457,72 @@
             color: #fff;
         }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
 
         /* ── Responsive ───────────────────────────────── */
         @media (max-width: 768px) {
-            .header h1 { font-size: 32px; }
-            .stats-row { grid-template-columns: repeat(2, 1fr); }
-            .chart-grid.cols-2 { grid-template-columns: 1fr; }
-            .tab-nav { flex-wrap: wrap; }
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .chart-grid.cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-nav {
+                flex-wrap: wrap;
+            }
         }
 
         /* ── Animations ───────────────────────────────── */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .stat-card, .chart-card, .insight-card, .model-table-wrap {
+        .stat-card,
+        .chart-card,
+        .insight-card,
+        .model-table-wrap {
             animation: fadeInUp 0.6s ease both;
         }
 
-        .stat-card:nth-child(2) { animation-delay: 0.05s; }
-        .stat-card:nth-child(3) { animation-delay: 0.1s; }
-        .stat-card:nth-child(4) { animation-delay: 0.15s; }
-        .stat-card:nth-child(5) { animation-delay: 0.2s; }
-        .stat-card:nth-child(6) { animation-delay: 0.25s; }
+        .stat-card:nth-child(2) {
+            animation-delay: 0.05s;
+        }
+
+        .stat-card:nth-child(3) {
+            animation-delay: 0.1s;
+        }
+
+        .stat-card:nth-child(4) {
+            animation-delay: 0.15s;
+        }
+
+        .stat-card:nth-child(5) {
+            animation-delay: 0.2s;
+        }
+
+        .stat-card:nth-child(6) {
+            animation-delay: 0.25s;
+        }
 
         /* ── Comparison Table ─────────────────────────── */
         .comparison-grid {
@@ -458,7 +556,7 @@
             font-size: 13px;
             color: var(--text-secondary);
             padding: 6px 0;
-            border-bottom: 1px solid rgba(48,54,61,0.3);
+            border-bottom: 1px solid rgba(48, 54, 61, 0.3);
             line-height: 1.5;
         }
 
@@ -468,415 +566,398 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- ── Header ──────────────────────────────────────────────────── -->
-    <div class="header">
-        <div class="header-badge">🚕 ALY6110 — Big Data Analytics</div>
-        <h1>Austin, TX<br>Ride-Hailing Analysis</h1>
-        <p>Comprehensive EDA, ML modeling, and cross-city insights from 910,522 cleaned ride records (June 2016 – Feb 2017)</p>
+        <!-- ── Header ──────────────────────────────────────────────────── -->
+        <div class="header">
+            <div class="header-badge">🚕 ALY6110 — Big Data Analytics</div>
+            <h1>Austin, TX<br>Ride-Hailing Analysis</h1>
+            <p>Comprehensive EDA, ML modeling, and cross-city insights from 910,522 cleaned ride records (June 2016 –
+                Feb 2017)</p>
+        </div>
+
+        <!-- ── Stats Row ───────────────────────────────────────────────── -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value">910,522</div>
+                <div class="stat-label">Cleaned Records</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$8.31</div>
+                <div class="stat-label">Median Fare</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3.61 mi</div>
+                <div class="stat-label">Median Distance</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">r = 0.849</div>
+                <div class="stat-label">Dist–Fare Correlation</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">10.2%</div>
+                <div class="stat-label">Surge Rides</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">R² 0.996</div>
+                <div class="stat-label">Best Model Score</div>
+            </div>
+        </div>
+
+        <!-- ── Tab Navigation ──────────────────────────────────────────── -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="showTab('eda')">📊 EDA</button>
+            <button class="tab-btn" onclick="showTab('ml')">🤖 ML Models</button>
+            <button class="tab-btn" onclick="showTab('insights')">💡 Insights</button>
+            <button class="tab-btn" onclick="showTab('compare')">🌆 Cross-City</button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!--  TAB: EDA                                                      -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div id="tab-eda" class="tab-content active">
+            <div class="section">
+                <div class="section-header">
+                    <h2>Exploratory Data Analysis</h2>
+                    <span class="section-subtitle">11 visualizations from 910K+ records</span>
+                </div>
+
+                <div class="chart-grid cols-2">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Fare Distribution</span>
+                            <span class="chart-tag eda">EDA</span>
+                        </div>
+                        <img src="../outputs/01_fare_distribution.png" alt="Fare Distribution" loading="lazy">
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Trip Distance Distribution</span>
+                            <span class="chart-tag eda">EDA</span>
+                        </div>
+                        <img src="../outputs/02_distance_distribution.png" alt="Distance Distribution" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="chart-grid cols-1" style="margin-top: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Hourly Ride Demand & Average Fare</span>
+                            <span class="chart-tag eda">EDA</span>
+                        </div>
+                        <img src="../outputs/03_hourly_demand.png" alt="Hourly Demand" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="chart-grid cols-2" style="margin-top: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Day of Week Patterns</span>
+                            <span class="chart-tag eda">EDA</span>
+                        </div>
+                        <img src="../outputs/04_day_of_week.png" alt="Day of Week" loading="lazy">
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Car Category Breakdown</span>
+                            <span class="chart-tag eda">EDA</span>
+                        </div>
+                        <img src="../outputs/09_car_category.png" alt="Car Categories" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="chart-grid cols-1" style="margin-top: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Surge Pricing Analysis</span>
+                            <span class="chart-tag eda">EDA</span>
+                        </div>
+                        <img src="../outputs/05_surge_analysis.png" alt="Surge Analysis" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="chart-grid cols-2" style="margin-top: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Monthly Trip Volume & Fare Trend</span>
+                            <span class="chart-tag eda">EDA</span>
+                        </div>
+                        <img src="../outputs/10_monthly_trend.png" alt="Monthly Trend" loading="lazy">
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Demand Heatmap (Hour × Day)</span>
+                            <span class="chart-tag eda">EDA</span>
+                        </div>
+                        <img src="../outputs/11_demand_heatmap.png" alt="Demand Heatmap" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="chart-grid cols-2" style="margin-top: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Distance vs Fare (Colored by Surge)</span>
+                            <span class="chart-tag correlation">Correlation</span>
+                        </div>
+                        <img src="../outputs/07_distance_vs_fare.png" alt="Distance vs Fare" loading="lazy">
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Feature Correlation Matrix</span>
+                            <span class="chart-tag correlation">Correlation</span>
+                        </div>
+                        <img src="../outputs/08_correlation_heatmap.png" alt="Correlation Heatmap" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!--  TAB: ML Models                                                -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div id="tab-ml" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2>Machine Learning Models</h2>
+                    <span class="section-subtitle">Fare prediction — 13 features</span>
+                </div>
+
+                <!-- Model Table -->
+                <div class="model-table-wrap">
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>R² Score</th>
+                                <th>MAE ($)</th>
+                                <th>RMSE ($)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="model-name">Gradient Boosting Regressor</td>
+                                <td class="metric-value best">0.9964</td>
+                                <td class="metric-value">$0.29</td>
+                                <td class="metric-value">$0.47</td>
+                                <td><span class="badge-best">🏆 BEST</span></td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">Extra Trees Regressor</td>
+                                <td class="metric-value">0.8916</td>
+                                <td class="metric-value">$1.65</td>
+                                <td class="metric-value">$2.60</td>
+                                <td><span style="color:var(--text-muted); font-size:13px">Baseline</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="chart-grid cols-2" style="margin-top: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Feature Importance Comparison</span>
+                            <span class="chart-tag ml">ML</span>
+                        </div>
+                        <img src="../outputs/12_feature_importance.png" alt="Feature Importance" loading="lazy">
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Model Performance Comparison</span>
+                            <span class="chart-tag ml">ML</span>
+                        </div>
+                        <img src="../outputs/13_model_comparison.png" alt="Model Comparison" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="chart-grid cols-2" style="margin-top: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Actual vs Predicted Fare</span>
+                            <span class="chart-tag ml">ML</span>
+                        </div>
+                        <img src="../outputs/14_actual_vs_predicted.png" alt="Actual vs Predicted" loading="lazy">
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Residual Analysis</span>
+                            <span class="chart-tag ml">ML</span>
+                        </div>
+                        <img src="../outputs/15_residual_analysis.png" alt="Residuals" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!--  TAB: Insights                                                 -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div id="tab-insights" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2>Key Business Insights</h2>
+                </div>
+
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-icon">📏</div>
+                        <h3>Distance Drives Pricing</h3>
+                        <p>Trip distance is the strongest predictor of fare (r = 0.849). A linear relationship explains
+                            ~72% of fare variance before considering other features.</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">⚡</div>
+                        <h3>Surge Pricing Volatility</h3>
+                        <p>10.2% of rides experience surge pricing. At peak surge (6x), fares increase by up to 500% —
+                            reflecting acute demand-supply imbalance during events and late nights.</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">🌙</div>
+                        <h3>Late-Night & Weekend Peaks</h3>
+                        <p>Demand peaks around midnight–2AM (nightlife) and early morning (4AM). Sunday is the busiest
+                            day, indicating Austin's vibrant entertainment district driving ride-hailing usage.</p>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="insight-icon">🚗</div>
+                        <h3>Vehicle Category Premium</h3>
+                        <p>95.1% of rides use REGULAR category. SUV and PREMIUM categories command 15-40% fare premiums,
+                            suggesting price-inelastic demand for premium services.</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">🤖</div>
+                        <h3>ML Predicts with 99.6% Accuracy</h3>
+                        <p>Gradient Boosting achieves R²=0.9964 with just $0.29 MAE. Duration and distance are the top
+                            features, while surge factor and time-of-day introduce non-linear effects captured by
+                            ensemble methods.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!--  TAB: Cross-City Comparison                                    -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div id="tab-compare" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2>Cross-City Comparison</h2>
+                    <span class="section-subtitle">Austin vs NYC, Chicago, DC, San Francisco</span>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="city-compare-card">
+                        <h3>🗽 Austin vs NYC</h3>
+                        <ul>
+                            <li>Austin has significantly smaller scale (~910K vs millions of HVFHV trips)</li>
+                            <li>Austin surge impact is relatively stronger (up to 6x vs NYC's more regulated pricing)
+                            </li>
+                            <li>Less congestion-driven pricing than Manhattan's grid-based patterns</li>
+                            <li>Austin's nightlife-driven demand pattern contrasts with NYC's commuter peaks</li>
+                        </ul>
+                    </div>
+                    <div class="city-compare-card">
+                        <h3>🏙️ Austin vs Chicago</h3>
+                        <ul>
+                            <li>Chicago's transit integration creates more linear pricing</li>
+                            <li>Austin is more demand-driven with entertainment-focused spikes</li>
+                            <li>Both show strong distance-fare correlations</li>
+                        </ul>
+                    </div>
+                    <div class="city-compare-card">
+                        <h3>🏛️ Austin vs Washington DC</h3>
+                        <ul>
+                            <li>DC showed distinct tipping patterns not present in Austin</li>
+                            <li>Austin's surge-driven pricing is more volatile than DC's steadier fares</li>
+                            <li>DC's Metro proximity creates alternative transport competition</li>
+                            <li>Austin's sprawling layout leads to longer average distances</li>
+                        </ul>
+                    </div>
+                    <div class="city-compare-card">
+                        <h3>🌉 Austin vs San Francisco</h3>
+                        <ul>
+                            <li>SF's tech-heavy early adoption contrasts with Austin's emerging market</li>
+                            <li>Terrain differences: SF hills vs Austin flat terrain affect routing</li>
+                            <li>Both cities show strong tech-driven demand patterns</li>
+                            <li>Austin's entertainment district creates more concentrated demand zones</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Combined dataset stats -->
+                <div class="model-table-wrap" style="margin-top: 24px;">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">Combined Dataset — 5 Cities</h3>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>City</th>
+                                <th>Records</th>
+                                <th>Share</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="model-name">🏛️ Washington DC</td>
+                                <td>2,574,807</td>
+                                <td>63.5%</td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">🤠 Austin, TX</td>
+                                <td>909,830</td>
+                                <td>22.4%</td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">🗽 New York City</td>
+                                <td>199,957</td>
+                                <td>4.9%</td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">🌉 San Francisco</td>
+                                <td>191,128</td>
+                                <td>4.7%</td>
+                            </tr>
+                            <tr>
+                                <td class="model-name">🏙️ Chicago</td>
+                                <td>179,205</td>
+                                <td>4.4%</td>
+                            </tr>
+                            <tr style="background: rgba(88,166,255,0.05);">
+                                <td class="model-name" style="color: var(--accent-blue);">Total Combined</td>
+                                <td style="font-weight:800; color: var(--accent-blue);">4,054,927</td>
+                                <td style="font-weight:700; color: var(--accent-blue);">100%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Footer ──────────────────────────────────────────────────── -->
+        <div class="footer">
+            <p>ALY6110 — Big Data Management & Analytics | Austin, TX Taxi Analysis | Feb 2026</p>
+            <p style="margin-top: 4px;">Dataset: RideAustin_Weather.csv (911K rides) • 910,522 cleaned records •
+                Gradient Boosting R²=0.9964</p>
+        </div>
+
     </div>
 
-    <!-- ── Stats Row ───────────────────────────────────────────────── -->
-    <div class="stats-row">
-        <div class="stat-card">
-            <div class="stat-value">910,522</div>
-            <div class="stat-label">Cleaned Records</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">$8.31</div>
-            <div class="stat-label">Median Fare</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">3.61 mi</div>
-            <div class="stat-label">Median Distance</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">r = 0.849</div>
-            <div class="stat-label">Dist–Fare Correlation</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">10.2%</div>
-            <div class="stat-label">Surge Rides</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">R² 0.996</div>
-            <div class="stat-label">Best Model Score</div>
-        </div>
-    </div>
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
-    <!-- ── Tab Navigation ──────────────────────────────────────────── -->
-    <div class="tab-nav">
-        <button class="tab-btn active" onclick="showTab('eda')">📊 EDA</button>
-        <button class="tab-btn" onclick="showTab('weather')">🌦 Weather</button>
-        <button class="tab-btn" onclick="showTab('ml')">🤖 ML Models</button>
-        <button class="tab-btn" onclick="showTab('insights')">💡 Insights</button>
-        <button class="tab-btn" onclick="showTab('compare')">🌆 Cross-City</button>
-    </div>
+            // Show selected tab
+            document.getElementById('tab-' + tabName).classList.add('active');
 
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <!--  TAB: EDA                                                      -->
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <div id="tab-eda" class="tab-content active">
-        <div class="section">
-            <div class="section-header">
-                <h2>Exploratory Data Analysis</h2>
-                <span class="section-subtitle">11 visualizations from 910K+ records</span>
-            </div>
-
-            <div class="chart-grid cols-2">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Fare Distribution</span>
-                        <span class="chart-tag eda">EDA</span>
-                    </div>
-                    <img src="../outputs/01_fare_distribution.png" alt="Fare Distribution" loading="lazy">
-                </div>
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Trip Distance Distribution</span>
-                        <span class="chart-tag eda">EDA</span>
-                    </div>
-                    <img src="../outputs/02_distance_distribution.png" alt="Distance Distribution" loading="lazy">
-                </div>
-            </div>
-
-            <div class="chart-grid cols-1" style="margin-top: 24px;">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Hourly Ride Demand & Average Fare</span>
-                        <span class="chart-tag eda">EDA</span>
-                    </div>
-                    <img src="../outputs/03_hourly_demand.png" alt="Hourly Demand" loading="lazy">
-                </div>
-            </div>
-
-            <div class="chart-grid cols-2" style="margin-top: 24px;">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Day of Week Patterns</span>
-                        <span class="chart-tag eda">EDA</span>
-                    </div>
-                    <img src="../outputs/04_day_of_week.png" alt="Day of Week" loading="lazy">
-                </div>
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Car Category Breakdown</span>
-                        <span class="chart-tag eda">EDA</span>
-                    </div>
-                    <img src="../outputs/09_car_category.png" alt="Car Categories" loading="lazy">
-                </div>
-            </div>
-
-            <div class="chart-grid cols-1" style="margin-top: 24px;">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Surge Pricing Analysis</span>
-                        <span class="chart-tag eda">EDA</span>
-                    </div>
-                    <img src="../outputs/05_surge_analysis.png" alt="Surge Analysis" loading="lazy">
-                </div>
-            </div>
-
-            <div class="chart-grid cols-2" style="margin-top: 24px;">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Monthly Trip Volume & Fare Trend</span>
-                        <span class="chart-tag eda">EDA</span>
-                    </div>
-                    <img src="../outputs/10_monthly_trend.png" alt="Monthly Trend" loading="lazy">
-                </div>
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Demand Heatmap (Hour × Day)</span>
-                        <span class="chart-tag eda">EDA</span>
-                    </div>
-                    <img src="../outputs/11_demand_heatmap.png" alt="Demand Heatmap" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <!--  TAB: Weather                                                  -->
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <div id="tab-weather" class="tab-content">
-        <div class="section">
-            <div class="section-header">
-                <h2>Weather Impact Analysis</h2>
-                <span class="section-subtitle">Temperature, rain, fog, wind correlations</span>
-            </div>
-
-            <div class="chart-grid cols-1">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Weather Impact on Ride-Hailing</span>
-                        <span class="chart-tag weather">Weather</span>
-                    </div>
-                    <img src="../outputs/06_weather_impact.png" alt="Weather Impact" loading="lazy">
-                </div>
-            </div>
-
-            <div class="chart-grid cols-2" style="margin-top: 24px;">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Distance vs Fare (Colored by Surge)</span>
-                        <span class="chart-tag correlation">Correlation</span>
-                    </div>
-                    <img src="../outputs/07_distance_vs_fare.png" alt="Distance vs Fare" loading="lazy">
-                </div>
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Feature Correlation Matrix</span>
-                        <span class="chart-tag correlation">Correlation</span>
-                    </div>
-                    <img src="../outputs/08_correlation_heatmap.png" alt="Correlation Heatmap" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <!--  TAB: ML Models                                                -->
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <div id="tab-ml" class="tab-content">
-        <div class="section">
-            <div class="section-header">
-                <h2>Machine Learning Models</h2>
-                <span class="section-subtitle">Fare prediction — 13 features</span>
-            </div>
-
-            <!-- Model Table -->
-            <div class="model-table-wrap">
-                <table class="model-table">
-                    <thead>
-                        <tr>
-                            <th>Model</th>
-                            <th>R² Score</th>
-                            <th>MAE ($)</th>
-                            <th>RMSE ($)</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="model-name">Gradient Boosting Regressor</td>
-                            <td class="metric-value best">0.9964</td>
-                            <td class="metric-value">$0.29</td>
-                            <td class="metric-value">$0.47</td>
-                            <td><span class="badge-best">🏆 BEST</span></td>
-                        </tr>
-                        <tr>
-                            <td class="model-name">Extra Trees Regressor</td>
-                            <td class="metric-value">0.8916</td>
-                            <td class="metric-value">$1.65</td>
-                            <td class="metric-value">$2.60</td>
-                            <td><span style="color:var(--text-muted); font-size:13px">Baseline</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="chart-grid cols-2" style="margin-top: 24px;">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Feature Importance Comparison</span>
-                        <span class="chart-tag ml">ML</span>
-                    </div>
-                    <img src="../outputs/12_feature_importance.png" alt="Feature Importance" loading="lazy">
-                </div>
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Model Performance Comparison</span>
-                        <span class="chart-tag ml">ML</span>
-                    </div>
-                    <img src="../outputs/13_model_comparison.png" alt="Model Comparison" loading="lazy">
-                </div>
-            </div>
-
-            <div class="chart-grid cols-2" style="margin-top: 24px;">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Actual vs Predicted Fare</span>
-                        <span class="chart-tag ml">ML</span>
-                    </div>
-                    <img src="../outputs/14_actual_vs_predicted.png" alt="Actual vs Predicted" loading="lazy">
-                </div>
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title">Residual Analysis</span>
-                        <span class="chart-tag ml">ML</span>
-                    </div>
-                    <img src="../outputs/15_residual_analysis.png" alt="Residuals" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <!--  TAB: Insights                                                 -->
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <div id="tab-insights" class="tab-content">
-        <div class="section">
-            <div class="section-header">
-                <h2>Key Business Insights</h2>
-            </div>
-
-            <div class="insights-grid">
-                <div class="insight-card">
-                    <div class="insight-icon">📏</div>
-                    <h3>Distance Drives Pricing</h3>
-                    <p>Trip distance is the strongest predictor of fare (r = 0.849). A linear relationship explains ~72% of fare variance before considering other features.</p>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-icon">⚡</div>
-                    <h3>Surge Pricing Volatility</h3>
-                    <p>10.2% of rides experience surge pricing. At peak surge (6x), fares increase by up to 500% — reflecting acute demand-supply imbalance during events and late nights.</p>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-icon">🌙</div>
-                    <h3>Late-Night & Weekend Peaks</h3>
-                    <p>Demand peaks around midnight–2AM (nightlife) and early morning (4AM). Sunday is the busiest day, indicating Austin's vibrant entertainment district driving ride-hailing usage.</p>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-icon">🌧️</div>
-                    <h3>Weather Influences Fares</h3>
-                    <p>Moderate-to-heavy rain correlates with higher average fares. Fog conditions show marginal fare increases, suggesting weather-driven demand shifts and longer trip durations.</p>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-icon">🚗</div>
-                    <h3>Vehicle Category Premium</h3>
-                    <p>95.1% of rides use REGULAR category. SUV and PREMIUM categories command 15-40% fare premiums, suggesting price-inelastic demand for premium services.</p>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-icon">🤖</div>
-                    <h3>ML Predicts with 99.6% Accuracy</h3>
-                    <p>Gradient Boosting achieves R²=0.9964 with just $0.29 MAE. Duration and distance are the top features, while surge factor and time-of-day introduce non-linear effects captured by ensemble methods.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <!--  TAB: Cross-City Comparison                                    -->
-    <!-- ═══════════════════════════════════════════════════════════════ -->
-    <div id="tab-compare" class="tab-content">
-        <div class="section">
-            <div class="section-header">
-                <h2>Cross-City Comparison</h2>
-                <span class="section-subtitle">Austin vs NYC, Chicago, DC, San Francisco</span>
-            </div>
-
-            <div class="comparison-grid">
-                <div class="city-compare-card">
-                    <h3>🗽 Austin vs NYC</h3>
-                    <ul>
-                        <li>Austin has significantly smaller scale (~910K vs millions of HVFHV trips)</li>
-                        <li>Austin surge impact is relatively stronger (up to 6x vs NYC's more regulated pricing)</li>
-                        <li>Less congestion-driven pricing than Manhattan's grid-based patterns</li>
-                        <li>Austin's nightlife-driven demand pattern contrasts with NYC's commuter peaks</li>
-                    </ul>
-                </div>
-                <div class="city-compare-card">
-                    <h3>🏙️ Austin vs Chicago</h3>
-                    <ul>
-                        <li>Chicago's transit integration creates more linear pricing</li>
-                        <li>Austin is more demand-driven with entertainment-focused spikes</li>
-                        <li>Austin weather impact differs — heat vs cold extremes</li>
-                        <li>Both show strong distance-fare correlations</li>
-                    </ul>
-                </div>
-                <div class="city-compare-card">
-                    <h3>🏛️ Austin vs Washington DC</h3>
-                    <ul>
-                        <li>DC showed distinct tipping patterns not present in Austin</li>
-                        <li>Austin's surge-driven pricing is more volatile than DC's steadier fares</li>
-                        <li>DC's Metro proximity creates alternative transport competition</li>
-                        <li>Austin's sprawling layout leads to longer average distances</li>
-                    </ul>
-                </div>
-                <div class="city-compare-card">
-                    <h3>🌉 Austin vs San Francisco</h3>
-                    <ul>
-                        <li>SF's tech-heavy early adoption contrasts with Austin's emerging market</li>
-                        <li>Terrain differences: SF hills vs Austin flat terrain affect routing</li>
-                        <li>Both cities show strong temperature-demand correlations</li>
-                        <li>Austin's entertainment district creates more concentrated demand zones</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Combined dataset stats -->
-            <div class="model-table-wrap" style="margin-top: 24px;">
-                <h3 style="margin-bottom: 16px; font-size: 18px;">Combined Dataset — 5 Cities</h3>
-                <table class="model-table">
-                    <thead>
-                        <tr>
-                            <th>City</th>
-                            <th>Records</th>
-                            <th>Share</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="model-name">🏛️ Washington DC</td>
-                            <td>2,574,807</td>
-                            <td>63.5%</td>
-                        </tr>
-                        <tr>
-                            <td class="model-name">🤠 Austin, TX</td>
-                            <td>909,830</td>
-                            <td>22.4%</td>
-                        </tr>
-                        <tr>
-                            <td class="model-name">🗽 New York City</td>
-                            <td>199,957</td>
-                            <td>4.9%</td>
-                        </tr>
-                        <tr>
-                            <td class="model-name">🌉 San Francisco</td>
-                            <td>191,128</td>
-                            <td>4.7%</td>
-                        </tr>
-                        <tr>
-                            <td class="model-name">🏙️ Chicago</td>
-                            <td>179,205</td>
-                            <td>4.4%</td>
-                        </tr>
-                        <tr style="background: rgba(88,166,255,0.05);">
-                            <td class="model-name" style="color: var(--accent-blue);">Total Combined</td>
-                            <td style="font-weight:800; color: var(--accent-blue);">4,054,927</td>
-                            <td style="font-weight:700; color: var(--accent-blue);">100%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── Footer ──────────────────────────────────────────────────── -->
-    <div class="footer">
-        <p>ALY6110 — Big Data Management & Analytics | Austin, TX Taxi Analysis | Feb 2026</p>
-        <p style="margin-top: 4px;">Dataset: RideAustin_Weather.csv (911K rides) • 910,522 cleaned records • Gradient Boosting R²=0.9964</p>
-    </div>
-
-</div>
-
-<script>
-    function showTab(tabName) {
-        // Hide all tabs
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-
-        // Show selected tab
-        document.getElementById('tab-' + tabName).classList.add('active');
-
-        // Highlight button
-        event.target.classList.add('active');
-    }
-</script>
+            // Highlight button
+            event.target.classList.add('active');
+        }
+    </script>
 
 </body>
+
 </html>
