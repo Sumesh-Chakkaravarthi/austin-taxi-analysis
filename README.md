@@ -3,6 +3,9 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-Gradient%20Boosting-orange.svg)](https://scikit-learn.org/)
 [![Status](https://img.shields.io/badge/status-completed-success.svg)]()
+[![CI](https://github.com/Sumesh-Chakkaravarthi/austin-taxi-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/Sumesh-Chakkaravarthi/austin-taxi-analysis/actions/workflows/ci.yml)
+
+**[🔥 Live Interactive Dashboard (GitHub Pages)](https://Sumesh-Chakkaravarthi.github.io/austin-taxi-analysis/dashboard/index.html)**
 
 **ALY6110 — Big Data Management & Analytics**
 
@@ -78,7 +81,7 @@ This project analyzes **911,057 ride-hailing records** from Austin, Texas (June 
 ## 🔧 Setup & Requirements
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn pyarrow python-pptx
+pip install -r requirements.txt
 ```
 
 ### Run the Analysis
