@@ -1,8 +1,24 @@
 # Austin, TX — Ride-Hailing Data Analysis 🚕
 
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
+[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-Gradient%20Boosting-orange.svg)](https://scikit-learn.org/)
+[![Status](https://img.shields.io/badge/status-completed-success.svg)]()
+
 **ALY6110 — Big Data Management & Analytics**
 
-Comprehensive EDA, Machine Learning modeling, and cross-city comparison analysis on the RideAustin Weather dataset.
+Comprehensive Exploratory Data Analysis (EDA), Machine Learning modeling, and cross-city comparison analysis on the RideAustin Weather dataset.
+
+---
+
+## 🌟 Portfolio Presentation & Visual Highlights
+
+**[Download the Enhanced Project Presentation (PPTX)](Master_Deck_Final_group_presentation_Enhanced.pptx)** – A detailed, recruiter-ready walkthrough of the project's data insights, geospatial analysis, and machine learning pipeline (R² = 0.9964).
+
+### Key Visual Insights
+
+| Actual vs Predicted Fares (Gradient Boosting) | Surge Pricing Analysis |
+| :---: | :---: |
+| <img src="outputs/14_actual_vs_predicted.png" width="450"/> | <img src="outputs/05_surge_analysis.png" width="450"/> |
 
 ---
 
